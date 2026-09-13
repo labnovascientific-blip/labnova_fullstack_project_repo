@@ -1678,16 +1678,15 @@ p {
 
 /* Fixed About Collage */
 .about-collage {
+  height: 570px;
   position: relative;
-  width: 100%;
-  /* Removed fixed height, using aspect ratio to maintain shape and prevent overflow */
-  aspect-ratio: 16 / 10;
   margin-top: 70px;
   background-image:
     linear-gradient(rgba(11, 98, 206, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(11, 98, 206, 0.08) 1px, transparent 1px);
   background-size: 42px 42px;
 }
+
 .about-image {
   position: absolute;
   overflow: hidden;
@@ -1703,14 +1702,14 @@ p {
   top: 0;
   right: 4%;
   width: 56%;
-  height: 82%; /* Changed from fixed px to percentage */
+  height: 470px;
   transform: rotate(1.6deg);
 }
 .about-image--small {
   bottom: 0;
   left: 7%;
   width: 29%;
-  height: 44%; /* Changed from fixed px to percentage */
+  height: 250px;
   transform: rotate(-3deg);
 }
 .about-statement {
@@ -2759,7 +2758,6 @@ p {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  /* Updated Category Tiles for Tablet: 2 Columns */
   .category-tiles {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2799,6 +2797,27 @@ p {
   .contact-intro,
   .contact-form-wrap {
     padding: 44px 36px;
+  }
+  /* Scale down about collage for tablet */
+  .about-collage {
+    height: 460px;
+    margin-top: 56px;
+  }
+  .about-image--large {
+    height: 380px;
+    width: 58%;
+  }
+  .about-image--small {
+    width: 32%;
+    height: 210px;
+  }
+  .about-statement {
+    width: 300px;
+    padding: 28px;
+    top: 40px;
+  }
+  .about-statement strong {
+    font-size: 18px;
   }
 }
 
@@ -2885,7 +2904,6 @@ p {
     margin-bottom: 85px;
     padding: 55px 40px;
   }
-  /* Fixed footer responsiveness */
   .footer-inner {
     grid-template-columns: 1fr;
     row-gap: 30px;
@@ -2963,39 +2981,32 @@ p {
     margin-bottom: -5px;
   }
 
-  /* === UPDATED ABOUT COLLAGE FOR TABLET === */
+  /* === ABOUT COLLAGE KEEPS OVERLAP ON TABLET === */
   .about-collage {
-    aspect-ratio: auto;
-    height: auto;
-    min-height: 520px;
-    margin-top: 40px;
-    padding-bottom: 20px;
+    height: 420px;
+    margin-top: 48px;
   }
   .about-image--large {
-    position: relative;
-    width: 100%;
-    height: 320px;
-    right: auto;
-    top: auto;
-    transform: none;
-    margin-bottom: 20px;
-  }
-  .about-statement {
-    position: relative;
-    width: 100%;
-    top: auto;
-    left: auto;
-    margin-bottom: 20px;
-    padding: 24px;
+    height: 340px;
+    width: 60%;
+    right: 2%;
   }
   .about-image--small {
-    position: relative;
-    width: 100%;
-    height: 260px;
-    left: auto;
-    bottom: auto;
-    transform: none;
-    margin-bottom: 0;
+    width: 36%;
+    height: 200px;
+    left: 4%;
+  }
+  .about-statement {
+    width: 260px;
+    padding: 22px;
+    top: 30px;
+  }
+  .about-statement span {
+    margin-bottom: 12px;
+    font-size: 7.5px;
+  }
+  .about-statement strong {
+    font-size: 16px;
   }
 
   .story {
@@ -3026,7 +3037,6 @@ p {
     position: static;
   }
 
-  /* === UPDATED CATEGORY TILES FOR MOBILE: VERTICAL STACK === */
   .category-tiles {
     display: flex;
     flex-direction: column;
@@ -3183,7 +3193,6 @@ p {
     grid-template-columns: 1fr;
   }
 
-  /* Ensure Category Tiles remain vertical on small mobile */
   .category-tiles {
     display: flex;
     flex-direction: column;
@@ -3258,18 +3267,39 @@ p {
     font-size: 13px;
   }
 
-  /* === UPDATED ABOUT COLLAGE FOR MOBILE === */
+  /* === ABOUT COLLAGE STILL KEEPS OVERLAP ON MOBILE === */
+  .about-collage {
+    height: 340px;
+    margin-top: 38px;
+  }
+  .about-image {
+    border-width: 6px;
+  }
   .about-image--large {
-    height: 240px;
-  }
-  .about-statement {
-    padding: 20px;
-  }
-  .about-statement strong {
-    font-size: 18px;
+    height: 270px;
+    width: 68%;
+    right: 0;
+    transform: rotate(1.2deg);
   }
   .about-image--small {
-    height: 200px;
+    width: 42%;
+    height: 160px;
+    left: 2%;
+    transform: rotate(-2.4deg);
+  }
+  .about-statement {
+    width: 210px;
+    padding: 18px;
+    top: 20px;
+  }
+  .about-statement span {
+    margin-bottom: 10px;
+    font-size: 7px;
+    letter-spacing: 0.12em;
+  }
+  .about-statement strong {
+    font-size: 13.5px;
+    line-height: 1.4;
   }
 
   .quality-banner {

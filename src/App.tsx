@@ -52,9 +52,33 @@ function useRoute() {
       window.history.pushState({}, "", path);
     }
     setRoute(path);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Instant scroll (not smooth) so it completes synchronously and the new
+    // page renders at the top. Smooth scrolling here caused a race condition
+    // on mobile where the scroll animation ran against a DOM that was being
+    // swapped out, leaving the user stuck mid-page on product detail pages.
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant" as ScrollBehavior,
+    });
   };
   return { route, navigate };
+}
+
+/**
+ * Safety net that snaps the window back to the top on every route change.
+ * Catches browser back/forward navigation and any edge case where navigate()
+ * didn't run — prevents the user from landing mid-page after a route swap.
+ */
+function ScrollReset({ route }: { route: string }) {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant" as ScrollBehavior,
+    });
+  }, [route]);
+  return null;
 }
 
 type CartLine = { productId: string; quantities: Record<string, number> };
@@ -289,6 +313,7 @@ export function App() {
   return (
     <>
       <SplashScreen visible={showSplash} />
+      <ScrollReset route={route} />
       {mainContent}
     </>
   );
