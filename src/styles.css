@@ -1641,6 +1641,7 @@ p {
   gap: 8px;
 }
 
+/* === ABOUT PAGE === */
 .about-hero {
   padding-top: 50px;
 }
@@ -1674,9 +1675,13 @@ p {
   font-size: 15px;
   line-height: 1.8;
 }
+
+/* Fixed About Collage */
 .about-collage {
-  height: 570px;
   position: relative;
+  width: 100%;
+  /* Removed fixed height, using aspect ratio to maintain shape and prevent overflow */
+  aspect-ratio: 16 / 10;
   margin-top: 70px;
   background-image:
     linear-gradient(rgba(11, 98, 206, 0.08) 1px, transparent 1px),
@@ -1698,14 +1703,14 @@ p {
   top: 0;
   right: 4%;
   width: 56%;
-  height: 470px;
+  height: 82%; /* Changed from fixed px to percentage */
   transform: rotate(1.6deg);
 }
 .about-image--small {
   bottom: 0;
   left: 7%;
   width: 29%;
-  height: 250px;
+  height: 44%; /* Changed from fixed px to percentage */
   transform: rotate(-3deg);
 }
 .about-statement {
@@ -1731,6 +1736,7 @@ p {
   font-size: 21px;
   line-height: 1.45;
 }
+
 .story {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
@@ -2470,9 +2476,11 @@ p {
   position: fixed;
   z-index: 100;
   inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
   background: rgba(3, 15, 50, 0.6);
   backdrop-filter: blur(9px);
   animation: fadeIn 0.2s ease;
@@ -2662,7 +2670,7 @@ p {
   animation: modalIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .image-lightbox__close {
-  position: absolute;
+  position: fixed;
   top: 22px;
   right: 26px;
   width: 42px;
@@ -2673,6 +2681,7 @@ p {
   border-radius: 50%;
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
+  z-index: 101;
 }
 .image-lightbox__close:hover {
   background: rgba(255, 255, 255, 0.16);
@@ -2750,6 +2759,7 @@ p {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  /* Updated Category Tiles for Tablet: 2 Columns */
   .category-tiles {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2952,17 +2962,42 @@ p {
   .about-headline .eyebrow {
     margin-bottom: -5px;
   }
+
+  /* === UPDATED ABOUT COLLAGE FOR TABLET === */
   .about-collage {
-    height: 520px;
+    aspect-ratio: auto;
+    height: auto;
+    min-height: 520px;
+    margin-top: 40px;
+    padding-bottom: 20px;
   }
   .about-image--large {
-    right: 0;
-    width: 68%;
+    position: relative;
+    width: 100%;
+    height: 320px;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin-bottom: 20px;
+  }
+  .about-statement {
+    position: relative;
+    width: 100%;
+    top: auto;
+    left: auto;
+    margin-bottom: 20px;
+    padding: 24px;
   }
   .about-image--small {
-    left: 2%;
-    width: 37%;
+    position: relative;
+    width: 100%;
+    height: 260px;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin-bottom: 0;
   }
+
   .story {
     grid-template-columns: 1fr;
     gap: 45px;
@@ -2989,6 +3024,31 @@ p {
   }
   .cart-summary {
     position: static;
+  }
+
+  /* === UPDATED CATEGORY TILES FOR MOBILE: VERTICAL STACK === */
+  .category-tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-x: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+  .category-tile {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 16px 18px;
+  }
+  .category-tile__icon {
+    width: 42px;
+    height: 42px;
+  }
+  .category-tile__body strong {
+    font-size: 16px;
+  }
+  .category-tile__body span {
+    font-size: 11px;
   }
 }
 
@@ -3030,11 +3090,10 @@ p {
     margin-top: 20px;
     font-size: 14px;
   }
-  /* Fixed CTA buttons to have padding on small screens */
   .lh-hero-actions {
     align-items: stretch;
     flex-direction: column;
-    padding: 0 16px; /* Added padding so buttons don't touch edges */
+    padding: 0 16px;
   }
   .lh-hero-actions .button {
     width: 100%;
@@ -3045,7 +3104,7 @@ p {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     row-gap: 16px;
-    padding: 0 16px; /* Added padding */
+    padding: 0 16px;
   }
   .lh-trust-item {
     min-width: 0;
@@ -3061,14 +3120,13 @@ p {
     letter-spacing: 0.03em;
     overflow-wrap: anywhere;
   }
-  /* Fixed hero visual to not overflow on small screens */
   .lh-visual-wrap {
     min-height: 340px;
-    margin: 12px 0 0; /* Removed negative margins */
+    margin: 12px 0 0;
   }
   .lh-orbital-field {
-    width: 100%; /* Changed from fixed 420px to 100% */
-    max-width: 360px; /* Constrained max width */
+    width: 100%;
+    max-width: 360px;
     margin: 0 auto;
   }
   .lh-card-a {
@@ -3085,7 +3143,7 @@ p {
   }
   .lh-product-card {
     gap: 8px;
-    max-width: 130px; /* Reduced max width slightly */
+    max-width: 130px;
     padding: 6px 8px;
   }
   .lh-thumb {
@@ -3124,19 +3182,17 @@ p {
   .product-grid {
     grid-template-columns: 1fr;
   }
-  /* Fixed category tiles to scroll horizontally on mobile */
+
+  /* Ensure Category Tiles remain vertical on small mobile */
   .category-tiles {
     display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding-bottom: 10px; /* Space for scrollbar */
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    gap: 10px;
   }
   .category-tile {
-    flex: 0 0 85%; /* Show a peek of the next item */
-    scroll-snap-align: start;
+    padding: 14px 16px;
   }
+
   .product-card__image {
     height: 280px;
   }
@@ -3158,7 +3214,6 @@ p {
   .footer {
     padding-top: 45px;
   }
-  /* Footer stack on very small screens */
   .footer-inner {
     grid-template-columns: 1fr;
   }
@@ -3202,26 +3257,21 @@ p {
   .about-headline > p {
     font-size: 13px;
   }
-  .about-collage {
-    height: 480px;
-    margin-top: 48px;
-  }
+
+  /* === UPDATED ABOUT COLLAGE FOR MOBILE === */
   .about-image--large {
-    width: 82%;
-    height: 380px;
-  }
-  .about-image--small {
-    width: 45%;
-    height: 190px;
+    height: 240px;
   }
   .about-statement {
-    top: 45px;
-    width: 72%;
-    padding: 24px;
+    padding: 20px;
   }
   .about-statement strong {
-    font-size: 16px;
+    font-size: 18px;
   }
+  .about-image--small {
+    height: 200px;
+  }
+
   .quality-banner {
     grid-template-columns: 1fr;
     padding: 36px 28px;
@@ -3971,7 +4021,6 @@ p {
   background: #2f9e5b;
   box-shadow: 0 0 0 3px rgba(47, 158, 91, 0.18);
 }
-/* Changed from red to gray for better UI matching */
 .stock-pill--out {
   color: #64748b;
   background: rgba(100, 116, 139, 0.1);
@@ -4020,7 +4069,7 @@ p {
 .cart-line__tag {
   display: inline-block;
   margin-top: 6px;
-  color: #64748b; /* Changed to gray */
+  color: #64748b;
   font-size: 9.5px;
   font-style: normal;
   font-weight: 700;
@@ -4046,8 +4095,8 @@ p {
 .quote-mini__tag {
   border-radius: 4px;
   padding: 2px 6px;
-  background: rgba(100, 116, 139, 0.12); /* Changed to gray */
-  color: #64748b; /* Changed to gray */
+  background: rgba(100, 116, 139, 0.12);
+  color: #64748b;
   font-size: 7.5px;
   font-style: normal;
   font-weight: 700;
@@ -4068,7 +4117,7 @@ p {
 .quote-summary__note svg {
   flex: 0 0 auto;
   margin-top: 2px;
-  color: #64748b; /* Changed to gray */
+  color: #64748b;
 }
 
 /* === Home page: "Explore Our Product Categories" section === */
@@ -4081,11 +4130,14 @@ p {
 .category-tiles-section .section-heading h2 {
   font-size: 30px;
 }
+
+/* Desktop Layout: Grid of 4 columns */
 .category-tiles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
+
 .category-tile {
   display: flex;
   align-items: center;
@@ -4145,6 +4197,44 @@ p {
 .category-tile:hover .category-tile__arrow {
   transform: translateX(3px);
   color: var(--royal);
+}
+
+/* Tablet Layout: 2 Columns */
+@media (max-width: 1120px) {
+  .category-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile Layout: Vertical Stack */
+@media (max-width: 820px) {
+  .category-tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-x: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+
+  .category-tile {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 16px 18px;
+  }
+
+  .category-tile__icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .category-tile__body strong {
+    font-size: 16px;
+  }
+
+  .category-tile__body span {
+    font-size: 11px;
+  }
 }
 
 /* === Admin: toggle switches for In Stock / Hide Price / Featured === */
